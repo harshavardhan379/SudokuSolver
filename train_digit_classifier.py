@@ -1,5 +1,5 @@
 # import the necessary packages
-from pyimagesearch.models import SudokuNet
+from main.models import SudokuNet
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.datasets import mnist
 from sklearn.preprocessing import LabelBinarizer
@@ -35,7 +35,8 @@ testLabels = le.transform(testLabels)
 # initialize the optimizer and model
 print("[INFO] compiling model...")
 opt = Adam(lr=INIT_LR)
-model = SudokuNet.build(width=28, height=28, depth=1, classes=10)
+sudokunet = SudokuNet.SudokuNet()
+model = sudokunet.build(width=28, height=28, depth=1, classes=10)
 model.compile(loss="categorical_crossentropy", optimizer=opt,
 	metrics=["accuracy"])
 # train the network
