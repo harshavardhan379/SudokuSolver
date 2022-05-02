@@ -1,9 +1,9 @@
 # import the necessary packages
-from pyimagesearch.sudoku import extract_digit
-from pyimagesearch.sudoku import find_puzzle
+from main.Sudoku.puzzle import extract_digit
+from main.Sudoku.puzzle import find_puzzle
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
-from Sudoku import Sudoku
+from sudoku import Sudoku
 import numpy as np
 import argparse
 import imutils
@@ -71,6 +71,7 @@ for y in range(0, 9):
 			# classify the digit and update the Sudoku board with the
 			# prediction
 			pred = model.predict(roi).argmax(axis=1)[0]
+			print(pred)
 			board[y, x] = pred
 	# add the row to our cell locations
 	cellLocs.append(row)
@@ -78,11 +79,11 @@ for y in range(0, 9):
 
  # construct a Sudoku puzzle from the board
 print("[INFO] OCR'd Sudoku board:")
-puzzle = Sudoku(3, 3, board=board.tolist())
-puzzle.show()
+puzz = Sudoku(3, 3, board=board.tolist())
+puzz.show()
 # solve the Sudoku puzzle
 print("[INFO] solving Sudoku puzzle...")
-solution = puzzle.solve()
+solution = puzz.solve()
 solution.show_full()
 
 
