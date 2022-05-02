@@ -1,9 +1,11 @@
 # import the necessary packages
 from imutils.perspective import four_point_transform
 from skimage.segmentation import clear_border
+from tensorflow.keras.models import load_model
 import numpy as np
 import imutils
 import cv2
+import matplotlib.pyplot as plt
 def find_puzzle(image, debug=False):
 	# convert the image to grayscale and blur it slightly
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -66,7 +68,7 @@ def find_puzzle(image, debug=False):
 	return (puzzle, warped)
 
 
- def extract_digit(cell, debug=False):
+def extract_digit(cell, debug=False):
 	# apply automatic thresholding to the cell and then clear any
 	# connected borders that touch the border of the cell
 	thresh = cv2.threshold(cell, 0, 255,
@@ -107,6 +109,12 @@ def find_puzzle(image, debug=False):
 		cv2.imshow("Digit", digit)
 		cv2.waitKey(0)
 	# return the digit to the calling function
+	
+	##EXTRAS
+
+	plt.imshow(digit)
+	plt.show()
+	
 	return digit
   
     
